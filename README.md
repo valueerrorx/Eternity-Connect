@@ -16,13 +16,11 @@ npm install
 npm start
 ```
 
-The HTTPS examples need a certificate in `certs/` (not included). Create a self-signed one for development:
+The two video chat examples run over HTTPS, because browsers only allow camera and microphone access in a secure context. On first start the server creates a self-signed certificate in `certs/` (requires `openssl`). Your browser will warn about it; accept the warning to continue.
 
-```bash
-mkdir -p certs
-openssl req -x509 -newkey rsa:2048 -nodes -days 365 \
-  -keyout certs/key.pem -out certs/cert.pem -subj "/CN=localhost"
-```
+- `videochat with textchat final` → https://localhost:3030
+- `videochat minimal https` → https://localhost:3000
+- `text chat minimal https` → http://localhost:3000 (plain HTTP, no certificate needed)
 
 ## License
 

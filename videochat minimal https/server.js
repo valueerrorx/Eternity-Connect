@@ -6,9 +6,23 @@ const fs = require('fs');
 
 const app = express();
 
+const path = require('path');
+const { execFileSync } = require('child_process');
+
+// Generate a self-signed development certificate on first start (needed for camera/mic over HTTPS)
+const certDir = path.join(__dirname, 'certs');
+const keyFile = path.join(certDir, 'key.pem');
+const certFile = path.join(certDir, 'cert.pem');
+if (!fs.existsSync(keyFile) || !fs.existsSync(certFile)) {
+    console.log('No certificate found, creating a self-signed one in certs/ ...');
+    fs.mkdirSync(certDir, { recursive: true });
+    execFileSync('openssl', ['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-days', '365',
+        '-keyout', keyFile, '-out', certFile, '-subj', '/CN=localhost'], { stdio: 'inherit' });
+}
+
 const sslOptions = {
-    key: fs.readFileSync('certs/key.pem'),
-    cert: fs.readFileSync('certs/cert.pem'),
+    key: fs.readFileSync(keyFile),
+    cert: fs.readFileSync(certFile),
 };
 const server = https.createServer(sslOptions, app);
 
