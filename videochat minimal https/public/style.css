@@ -1,0 +1,54 @@
+:root {
+    --main-darklg: #1d2635;
+    --main-dark: #161d29;
+    --primary-color: #2f80ec;
+    --main-light: #eeeeee;
+    font-family: sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    position: relative;
+    width: 100%;
+    background-color: var(--main-darklg);
+}
+
+.logo > h3 {
+    color: var(--main-light);
+}
+
+.main {
+    overflow: hidden;
+    height: 92vh;
+    display: flex;
+}
+
+
+.videos__group {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--main-dark);
+}
+
+video {
+  height: 300px;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  width: 400px;
+  object-fit: cover;
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
